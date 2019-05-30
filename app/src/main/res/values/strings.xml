@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Rubaroo</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_forgot_password">Forgot Password</string>
+    <string name="minimum_password">Password Too Short, Enter Minimum 6 characters!</string>
+    <string name="auth_failed">Authentication Failed, Check Your Email and Password</string>
+    <string name="lbl_forgot_password">Forgot Password?</string>
+    <string name="forgot_password_msg">We Just Need Your Registered Email ID To Send You The Password Reset Instructions.</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="btn_back"><![CDATA[<< Back]]></string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_admin_login">Admin Login</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="start_scanning">Start Scanning</string>
+    <string name="select_event">Select Event</string>
+    <string name="update">Update</string>
+    <string name="pick_time">Pick Time</string>
+
+    <string-array name="events_array">
+        <item>Opening Ceremony</item>
+        <item>3rd Council Meet</item>
+        <item>Investiture Ceremony</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "517940923750",
+    "firebase_url": "https://rubaroo-attendence.firebaseio.com",
+    "project_id": "rubaroo-attendence",
+    "storage_bucket": "rubaroo-attendence.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517940923750:android:f775cca9a12a8bba",
+        "android_client_info": {
+          "package_name": "com.example.krutantbilakhia.rubaroo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517940923750-se2fm8leimpeujkfl6l91v4i2ljqv9c5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.krutantbilakhia.rubaroo",
+            "certificate_hash": "d8f6d2b7c5475eee2f50f6f70da8bb8490bd968f"
+          }
+        },
+        {
+          "client_id": "517940923750-mvk5pebs8p25psiblbfq82fqvlnl0405.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq2x93vtphXjlARvHiQ4Fm_8Gtb-aWt5s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517940923750-mvk5pebs8p25psiblbfq82fqvlnl0405.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
