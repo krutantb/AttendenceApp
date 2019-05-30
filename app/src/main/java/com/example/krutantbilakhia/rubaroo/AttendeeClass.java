@@ -4,6 +4,7 @@ public class AttendeeClass {
     private String name, status, club;
 
 
+
     AttendeeClass() {
     }
 

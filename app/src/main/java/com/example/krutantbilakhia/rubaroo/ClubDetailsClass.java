@@ -4,14 +4,16 @@ public class ClubDetailsClass {
 
     public String clubName;
     public int clubCount;
+    private double percentage;
 
     ClubDetailsClass(){
     }
 
-    ClubDetailsClass(String clubName, int clubCount)
+    ClubDetailsClass(String clubName, int clubCount, double percentage)
     {
         this.clubName = clubName;
         this.clubCount = clubCount;
+        this.percentage = percentage;
     }
 
     public String getClubName() {
@@ -28,5 +30,13 @@ public class ClubDetailsClass {
 
     public void setClubCount(int clubCount) {
         this.clubCount = clubCount;
+    }
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
     }
 }

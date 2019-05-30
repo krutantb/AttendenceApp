@@ -1,6 +1,7 @@
 package com.example.krutantbilakhia.rubaroo;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +22,8 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.krutantbilakhia.rubaroo.EventSummaryActivity.eventForSummary;
 
 public class EventSummaryRecyclerAdapter extends RecyclerView.Adapter<EventSummaryRecyclerAdapter.MyHoder>{
 
@@ -69,9 +73,6 @@ public class EventSummaryRecyclerAdapter extends RecyclerView.Adapter<EventSumma
 //
 //        });
 
-        eventSummaryActivity = new EventSummaryActivity();
-        eventNameforPath = eventSummaryActivity.eventForSummary;
-
         return myHoder;
     }
 
@@ -84,7 +85,7 @@ public class EventSummaryRecyclerAdapter extends RecyclerView.Adapter<EventSumma
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         String clubNameforPath = mylist.getClubName();
 
-        Query mDatabaseReference = mFirebaseDatabase.getReference().child("Attendence").child(eventNameforPath).child(clubNameforPath);
+        Query mDatabaseReference = mFirebaseDatabase.getReference().child("Attendence").child(eventForSummary).child(clubNameforPath);
 
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -118,6 +119,7 @@ public class EventSummaryRecyclerAdapter extends RecyclerView.Adapter<EventSumma
                         listNew2.add(fire2);
                     }
 
+
                 }
 
                 myHoder.presentCount = listNew.size();
@@ -135,8 +137,25 @@ public class EventSummaryRecyclerAdapter extends RecyclerView.Adapter<EventSumma
             }
         });
 
+
+        myHoder.clubCountAsInt = Integer.parseInt(String.valueOf(mylist.getClubCount()));
         myHoder.clubName.setText(mylist.getClubName());
         myHoder.clubCount.setText(String.valueOf(mylist.getClubCount()));
+        myHoder.percentage.setText(String.valueOf((myHoder.presentCount + myHoder.latePresentCount)*100/myHoder.clubCountAsInt));
+
+        ClubDetailsClass clubDetailsClass = new ClubDetailsClass();
+
+        clubDetailsClass.setPercentage(Double.parseDouble(String.valueOf(((myHoder.presentCount + myHoder.latePresentCount)*100)/myHoder.clubCountAsInt)));
+
+        if(clubDetailsClass.getPercentage() >= 70)
+        {
+            myHoder.clubName.setTextColor(Color.GREEN);
+        }
+
+        if(clubDetailsClass.getPercentage() < 70)
+        {
+            myHoder.clubName.setTextColor(Color.RED);
+        }
 
     }
 
@@ -156,8 +175,8 @@ public class EventSummaryRecyclerAdapter extends RecyclerView.Adapter<EventSumma
     }
 
     class MyHoder extends RecyclerView.ViewHolder {
-        TextView clubName, clubCount, presentMembers, latePresentMembers;
-        int clubTotalAsInt, presentCount, latePresentCount;
+        TextView clubName, clubCount, presentMembers, latePresentMembers, percentage;
+        int clubCountAsInt, presentCount, latePresentCount;
 
         public MyHoder(View itemView) {
             super(itemView);
@@ -165,6 +184,7 @@ public class EventSummaryRecyclerAdapter extends RecyclerView.Adapter<EventSumma
             clubCount = (TextView) itemView.findViewById(R.id.nTotal);
             presentMembers = itemView.findViewById(R.id.nPresent);
             latePresentMembers = itemView.findViewById(R.id.nLatePresent);
+            percentage = itemView.findViewById(R.id.nPercentage);
         }
     }
 

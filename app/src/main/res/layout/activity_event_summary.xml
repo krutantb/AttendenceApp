@@ -13,12 +13,6 @@
         android:layout_height="wrap_content"
         android:prompt="@string/select_event" />
 
-    <Button
-        android:id="@+id/admin_btn_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/update" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,6 +45,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Late Present"/>
+
+            <TextView
+                android:id="@+id/percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Percent"/>
 
         </LinearLayout>
 

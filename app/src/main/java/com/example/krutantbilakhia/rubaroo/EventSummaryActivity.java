@@ -34,7 +34,7 @@ public class EventSummaryActivity extends AppCompatActivity implements AdapterVi
     FirebaseDatabase database;
     DatabaseReference myRef;
     RecyclerView recycle;
-    public String eventForSummary = "Null For Now";
+    public static String eventForSummary = "Null For Now";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,18 +57,6 @@ public class EventSummaryActivity extends AppCompatActivity implements AdapterVi
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
-
-//        updateButton = findViewById(R.id.admin_btn_update);
-//
-//        updateButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                    Toast.makeText(EventSummaryActivity.this, eventForSummary, Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-//        });
 
         myRef = FirebaseDatabase.getInstance().getReference().child("Club Total");
 
@@ -114,6 +102,7 @@ public class EventSummaryActivity extends AppCompatActivity implements AdapterVi
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         eventForSummary = (String) parent.getItemAtPosition(pos);
+        //Toast.makeText(EventSummaryActivity.this, eventForSummary, Toast.LENGTH_SHORT).show();
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
