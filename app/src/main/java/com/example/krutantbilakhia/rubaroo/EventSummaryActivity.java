@@ -3,7 +3,15 @@ package com.example.krutantbilakhia.rubaroo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,50 +25,73 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.krutantbilakhia.rubaroo.ScannedBarcodeActivity.adminEventForScanner;
 
-public class EventSummaryActivity extends AppCompatActivity {
+public class EventSummaryActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     TextView total, present;
-    private FirebaseDatabase mFirebaseDatabase;
-    int clubCount;
-    List<AttendeeClass> listNew;
+    List<ClubDetailsClass> list;
+    EventSummaryRecyclerAdapter eventSummaryRecyclerAdapter;
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    RecyclerView recycle;
+    public String eventForSummary = "Null For Now";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_summary);
 
+        //eventSummaryRecyclerAdapter = new EventSummaryRecyclerAdapter(list, EventSummaryActivity.this);
+
         total = findViewById(R.id.nTotal);
         present = findViewById(R.id.nPresent);
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        recycle = findViewById(R.id.recycle);
 
-        Query mDatabaseReference = mFirebaseDatabase.getReference().child("Attendence").child("3rd Council Meet").child("Panvel");
+        Spinner spinner = (Spinner) findViewById(R.id.events_spinner);
+        spinner.setOnItemSelectedListener(this);
 
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.events_array, android.R.layout.simple_spinner_item);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spinner.setAdapter(adapter);
+
+//        updateButton = findViewById(R.id.admin_btn_update);
+//
+//        updateButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                    Toast.makeText(EventSummaryActivity.this, eventForSummary, Toast.LENGTH_SHORT).show();
+//
+//
+//            }
+//        });
+
+        myRef = FirebaseDatabase.getInstance().getReference().child("Club Total");
+
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                listNew = new ArrayList<>();
+                list = new ArrayList<>();
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-                    AttendeeClass value = dataSnapshot1.getValue(AttendeeClass.class);
-                    AttendeeClass fire = new AttendeeClass();
-                    String name = value.getName();
-                    String club = value.getClub();
-                    String status = value.getStatus();
+                    ClubDetailsClass value = dataSnapshot1.getValue(ClubDetailsClass.class);
+                    ClubDetailsClass fire = new ClubDetailsClass();
+                    String clubName = value.getClubName();
+                    int clubCount = value.getClubCount();
 
-                    fire.setName(name);
-                    fire.setClub(club);
-                    fire.setStatus(status);
+                    fire.setClubName(clubName);
+                    fire.setClubCount(clubCount);
 
-                    listNew.add(fire);
+                    list.add(fire);
                 }
 
-                clubCount = listNew.size();
-                total.setText(String.valueOf(clubCount));
+                onActivityOpen();
             }
 
             @Override
@@ -69,6 +100,29 @@ public class EventSummaryActivity extends AppCompatActivity {
                 Log.w("Hello", "Failed to read value.", error.toException());
             }
         });
+
+
+    }
+
+    public void onActivityOpen() {
+        EventSummaryRecyclerAdapter recyclerAdapter = new EventSummaryRecyclerAdapter(list, EventSummaryActivity.this);
+        RecyclerView.LayoutManager recycleVariable = new LinearLayoutManager(EventSummaryActivity.this);
+        recycle.setLayoutManager(recycleVariable);
+        recycle.setItemAnimator(new DefaultItemAnimator());
+        recycle.setAdapter(recyclerAdapter);
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        eventForSummary = (String) parent.getItemAtPosition(pos);
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+        eventForSummary = "Temporary Null";
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

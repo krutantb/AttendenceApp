@@ -3,21 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView android:id="@+id/clubName"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Club Name"/>
+    <TextView
+        android:id="@+id/clubName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Club Name" />
 
     <TextView
-    android:id="@+id/nTotal"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@android:color/black" />
+        android:id="@+id/nTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black" />
 
     <TextView
-    android:id="@+id/nPresent"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+        android:id="@+id/nPresent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/nLatePresent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black" />
 
 
 </LinearLayout>

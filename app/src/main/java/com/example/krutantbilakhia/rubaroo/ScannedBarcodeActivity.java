@@ -43,7 +43,7 @@ public class ScannedBarcodeActivity extends AppCompatActivity {
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     String extractedName, extractedClub;
-    public static String adminEventForScanner, adminTimeForScanner;
+    public String adminEventForScanner, adminTimeForScanner;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference, databaseReference;
     public String nameCheck = "Name";

@@ -3,15 +3,15 @@ package com.example.krutantbilakhia.rubaroo;
 public class ClubDetailsClass {
 
     public String clubName;
-    public int clubTotal;
+    public int clubCount;
 
     ClubDetailsClass(){
     }
 
-    ClubDetailsClass(String clubName, int clubTotal)
+    ClubDetailsClass(String clubName, int clubCount)
     {
         this.clubName = clubName;
-        this.clubTotal = clubTotal;
+        this.clubCount = clubCount;
     }
 
     public String getClubName() {
@@ -22,11 +22,11 @@ public class ClubDetailsClass {
         this.clubName = clubName;
     }
 
-    public int getClubTotal() {
-        return clubTotal;
+    public int getClubCount() {
+        return clubCount;
     }
 
-    public void setClubTotal(int clubTotal) {
-        this.clubTotal = clubTotal;
+    public void setClubCount(int clubCount) {
+        this.clubCount = clubCount;
     }
 }
